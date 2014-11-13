@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <img src="{{ 'img/icon.png' | prepend: site.baseurl }}" style="width:115px; height:115px; float: right; margin:15px;"/>
+
+  <p>blinkbox Books is an ebook service based around a really simple idea. Reading. We just love to read, whatever it is, wherever we are, and we want to share our passion for books.</p>
+
+  <p>As software engineers we also want to share our passion for code, the posts in this blog cover some of the things we've found, built, designed and discussed.</p>
+
+  <hr />
+
+  <h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
