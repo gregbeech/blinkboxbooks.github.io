@@ -1,0 +1,17 @@
+title: blinkbox Books tech blog
+email: jobs@blinkbox.com
+description: Thoughts from the engineering team at blinkbox Books.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://blinkboxbooks.github.io"
+github_username:  blinkboxbooks
+
+# Build settings
+markdown: kramdown
+
+authors:
+  jphastings:
+    name: JP Hastings-Spital
+    display_name: JP
+    gravatar: 8f196eedfa0d23f02e6d92159e84e63d
+    github: jphastings
+    bio: "writes code for ingesting publisher books and metadata. When he's not doing that he's mostly swing dancing but no, it turns out you really can't do both of those at the same time."
