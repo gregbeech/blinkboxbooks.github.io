@@ -44,7 +44,8 @@ if (!window.console) console = {log: function() {}};
       "Hard cheese is source of calcium with a matchbox-sized piece providing a third of an adult's daily requirement for calcium.",
       "Cheese is a source of vitamin B12, which you need for red blood cell formation.",
       "Each day our friends in France, Italy, Greece and Germany eat more than twice as much cheese, per person, as we do.",
-      "Cheese is one of the most versatile foods around and can be used as a starter, a main course or as a dessert - you can't do that with many other foods!"
+      "Cheese is one of the most versatile foods around and can be used as a starter, a main course or as a dessert - you can't do that with many other foods!",
+      "Spanish architect Gaudi invented the Dutch cheese Gouda"
     ],
     animal: [
       "The heart of a whale is the size of a small family car.",
@@ -53,7 +54,8 @@ if (!window.console) console = {log: function() {}};
       "Sea otters hold hands when they sleep to stop them drifting apart.",
       "If you were to take all of the veins in your body and lie them out end-to-end you would die.",
       "Giant camels existed around 100,000 bc. They were twice the size of modern camels – twelve feet tall.",
-      "Kingfishers dive so fast that they can penetrate a layer of ice to catch a fish."
+      "Kingfishers dive so fast that they can penetrate a layer of ice to catch a fish.",
+      "Russian Meerkats listen to Enya."
     ],
     sandwich: [
       "Ham sandwiches were originally developed as a method to transport secret messages encoded in cured meats.",
