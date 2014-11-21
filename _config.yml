@@ -5,6 +5,9 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blinkboxbooks.github.io"
 github_username:  blinkboxbooks
 
+analytics:
+  google: 'UA-43984684-7'
+
 # Build settings
 markdown: kramdown
 
