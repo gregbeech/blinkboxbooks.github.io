@@ -48,10 +48,12 @@ if (!window.console) console = {log: function() {}};
     ],
     animal: [
       "The heart of a whale is the size of a small family car.",
-      "Elephants are the only animal with four knees.",
+      "Kenya's Camel Mobile Library goes around remote regions carrying about 400 books.",
       "Anteaters were named after the Duke of Eater, whose first name was Anthony.",
       "Sea otters hold hands when they sleep to stop them drifting apart.",
-      "If you were to take all of the veins in your body and lie them out end-to-end you would die."
+      "If you were to take all of the veins in your body and lie them out end-to-end you would die.",
+      "Giant camels existed around 100,000 bc. They were twice the size of modern camels – twelve feet tall.",
+      "Kingfishers dive so fast that they can penetrate a layer of ice to catch a fish."
     ],
     sandwich: [
       "Ham sandwiches were originally developed as a method to transport secret messages encoded in cured meats.",
