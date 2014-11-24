@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-The engineering team behind [blinkbox Books][1] regularly develop in Scala, AngularJS, Java (for Android), Objective-C (for iOS) and Ruby and occasionally find interesting things to say here on developing, testing and deploying our code.
+The engineering team behind [blinkbox Books][1] regularly develop in Scala, Javascript (Angular and Node), Java (for Android), Objective-C (for iOS) and Ruby and occasionally find interesting things to say here on developing, testing and deploying our code.
 
 ---
 
