@@ -25,7 +25,11 @@ if (!window.console) console = {log: function() {}};
       "The richest cat is Blackie who was left £15 million by his owner, Ben Rea.",
       "A cat has 230 bones in its body. A human has 206. A cat has no collarbone, so it can fit through any opening the size of its head.",
       "The tiniest cat on record is Mr. Pebbles, a 2-year-old cat that weighed 1.3 kg and was 15.5 cm high.",
-      "Approximately 1/3 of cat owners think their pets are able to read their minds."
+      "Approximately 1/3 of cat owners think their pets are able to read their minds.",
+      "The first cat in space was a French cat named Felicette (a.k.a. “Astrocat”) In 1963, France blasted the cat into outer space. Electrodes implanted in her brains sent neurological signals back to Earth. She survived the trip.",
+      "Approximately 40,000 people are bitten by cats in the U.S. annually.",
+      "Researchers are unsure exactly how a cat purrs. Most veterinarians believe that a cat purrs by vibrating vocal folds deep in the throat. To do this, a muscle in the larynx opens and closes the air passage about 25 times per second.",
+      "Cats have about 130,000 hairs per square inch (20,155 hairs per square centimeter)."
     ],
     cheese: [
       "Cheese is made from milk and it takes around 10 litres of milk to make 1kg of hard cheese.",
