@@ -247,7 +247,7 @@ If authentication and authorisation is required then there are two more that cou
 - `400 Bad Request` - the request was invalid (e.g. invalid body)
 - `409 Conflict` - the resource already exists
 
-You might find the `409 Conflict` code a bit unusual for resource creation as it's most commonly associated with conflicted updates. However, we found that trying to create sub-resources that already exist is such a common situation that it was worthy of its own status code, and it's arguable that the sub-resource already existing is a conflict with the current state of the list resource. I'm prepared to admit this _might_ be a minor abuse, but it's one we're generally happy with.
+You might find the `409 Conflict` code a bit unusual for resource creation as it's most commonly associated with conflicted updates. However, we found that trying to create sub-resources that already exist is such a common situation that it was worthy of its own status code; it's arguable that a situation where a sub-resource already exists is a symptom of the list resource being stale, and it is this that generates the conflict. I'm prepared to admit this _might_ be a minor abuse, but it's one we're generally happy with.
 
 One thing I'll also mention is that it's not valid to return `404 Not Found` to a `POST` request unless you specifically mean that the list endpoint does not exist, which you probably don't. A common mistake I see here is when people are adding a pre-existing resource (e.g. a book) to another list (e.g. a wishlist) that people return `404 Not Found` to indicate that the referenced book does not exist; here you should return `400 Bad Request` instead.
 
