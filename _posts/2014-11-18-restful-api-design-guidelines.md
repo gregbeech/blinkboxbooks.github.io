@@ -4,7 +4,41 @@ title: "RESTful API design guidelines"
 author: gregbeech
 ---
 
+_(Updated 2014-12-02: Added sections about resource orientation and status codes)_
+
 We spend a lot of time designing RESTful APIs and discussing different patterns and paradigms. Contrary to popular opinion designing RESTful APIs is actually pretty difficult, so I thought I'd share some of the decisions we've made. You might not agree with everything, but I've included some discussion around the points so you can at least see why we think it's the right thing to do.
+
+## Resource orientation
+
+I'm going to start with this because it's the most important section. It includes details that are covered in more depth in the rest of the post, so if there's anything you're not sure about don't worry; it'll be covered later.
+
+One of the key features of RESTful APIs is that they are resource-oriented. That is, you deal with resources rather than RPC-style requests and responses. The basic rules are:
+
+- URLs are nouns identifying resources
+- Verbs indicate the actions that are taken on the resource
+- URLs accept and return payloads of the type of resource they identify
+
+This last point is critical. You should not have `XxxRequest` and `XxxResponse` entities in REST as these are RPC concepts; you should only deal in entities.
+
+As an example, here's the outline of a simple bookmarks API:
+
+- `POST /my/bookmarks` creates a bookmark and takes a `Bookmark` resource in the entity-body. If it returns an entity-body it must return a complete `Bookmark` resource.
+- `GET /my/bookmarks` gets a list of `Bookmark` resources.
+- `GET /my/bookmarks/:id` gets an individual `Bookmark` resource.
+- `PATCH /my/bookmarks/:id` updates a bookmark and takes a `Bookmark` resource in then entity-body. If it returns an entity-body it must return a complete `Bookmark` resource.
+- `DELETE /my/bookmarks/:id` deletes a bookmark and returns no entity-body.
+
+Note that the only resource in the entire API is a `Bookmark`, and this is the only thing found in any entity-body. The exception to this is in error cases (i.e. status codes >= 400) where it is more appropriate to return an `Error` resource in the body, if any body is returned.
+
+Typically some of the fields on a bookmark will be read-only (set by the server) for example the resource identifier and creation date, so these would not be sent by the client on creation. Often other fields which may be set on creation will be read-only after the resource is created; in the example above it might not be valid to change the bookmark type after creation. 
+
+When writing code to implement this, it can be tricky to use a single class to handle these three cases, so it might be appropriate to define three _internal_ representations which map to a single Bookmark resource externally:
+
+- `class NewBookmark` represents a bookmark being created
+- `class Bookmark` represents a full, created, bookmark
+- `class BookmarkUpdates` represents updates to a bookmark
+
+However, this is an implementation detail and from the point of view of the API there is one single resource type, `Bookmark`.
 
 ## Verbs
 
@@ -189,6 +223,60 @@ PATCH /users/123/bookmarks/37462
   "cfi": "epubcfi(/6/4[chap01ref]!/4[body01]/10[para05]/2/1:0)"
 }
 ~~~
+
+## Status codes
+
+These are common status codes that we return for API requests, grouped by verb.
+
+If authentication and authorisation is required then there are two more that could apply to any of the verbs, which are commonly confused:
+
+- `401 Unauthorized` means that the server either doesn't know who you are or doesn't believe that you are who you claim to be. It must include a `WWW-Authenticate` header indicating how you can obtain/refresh/etc. the credentials to access the service. Re-authenticating may fix the situation
+- `403 Forbidden` means that the server knows who you are and believes you do not have permission to perform the action you were trying to do. Re-authenticating will not fix the situation.
+
+### GET
+
+- `200 OK` - the request was successful
+- `400 Bad Request` - the request was invalid (e.g. invalid parameters)
+- `404 Not Found` - the resource does not exist
+- `410 Gone` - the resource used to exist but doesn't any more and will not exist again; in general prefer `404 Not Found` to this code, but it may be useful in very specific cases
+
+### POST, or PUT (to non-existent path for resource creation)
+
+- `201 Created` - the resource has been created; the response must include a Location header
+- `202 Accepted` - the resource will be created but hasn't been yet; the request should include a Location header
+- `400 Bad Request` - the request was invalid (e.g. invalid body)
+- `409 Conflict` - the resource already exists
+
+You might find the `409 Conflict` code a bit unusual for resource creation as it's most commonly associated with conflicted updates. However, we found that trying to create sub-resources that already exist is such a common situation that it was worthy of its own status code; it's arguable that a situation where a sub-resource already exists is a symptom of the list resource being stale, and it is this that generates the conflict. I'm prepared to admit this _might_ be a minor abuse, but it's one we're generally happy with.
+
+One thing I'll also mention is that it's not valid to return `404 Not Found` to a `POST` request unless you specifically mean that the list endpoint does not exist, which you probably don't. A common mistake I see here is when people are adding a pre-existing resource (e.g. a book) to another list (e.g. a wishlist) that people return `404 Not Found` to indicate that the referenced book does not exist; here you should return `400 Bad Request` instead.
+
+### PUT (to an existing path for complete resource replacement)
+
+- `200 OK` - the resource has been replaced and the server is returning the complete resource in the body
+- `202 Accepted` - the resource will be replaced but it hasn't been yet
+- `204 No Content` - the resource has been replaced and the server is not returning anything in the body
+- `400 Bad Request` - the request was invalid (e.g. invalid body)
+- `404 Not Found` - the resource does not exist
+- `409 Conflict` - a conflicting modification has been made to the resource
+- `410 Gone` - the resource used to exist but doesn't any more and will not exist again; in general prefer `404 Not Found` to this code, but it may be useful in very specific cases
+
+### PATCH
+
+- `200 OK` - the resource has been updated and the server is returning the complete resource in the body
+- `202 Accepted` - the resource will be updated but it hasn't been yet
+- `204 No Content` - the resource has been updated and the server is not returning anything in the body
+- `400 Bad Request` - the request was invalid (e.g. invalid body)
+- `404 Not Found` - the resource does not exist
+- `409 Conflict` - a conflicting modification has been made to the resource
+- `410 Gone` - the resource used to exist but doesn't any more and will not exist again; in general prefer `404 Not Found` to this code, but it may be useful in very specific cases
+
+### DELETE
+
+- `202 Accepted` - the resource will be deleted but it hasn't been yet
+- `204 No Content` - the resource has been deleted and the server is not returning anything in the body
+- `404 Not Found` - the resource did not exist; only use this if it matters that the resource did not exist, otherwise prefer `204 No Content` as the net result is that the resource does not exist which is what was desired
+- `410 Gone` - the resource used to exist but doesn't any more and will not exist again; in general prefer either `204 No Content` or `404 Not Found` to this code, but it may be useful in very specific cases
 
 ## Error responses
 
