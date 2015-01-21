@@ -24,3 +24,9 @@ authors:
     gravatar: 8e731d0b83306e18d2221350cb720338
     github: gregbeech
     bio: "heads up the platform team, thinks a lot about processes, web services and messaging, and occasionally writes code. In his spare time he's probaby either riding motorbikes or buying more of them."
+  aikhelis:
+    name: Aliaksandr (Alex) Ikhelis
+    display_name: Alex
+    gravatar: 7df7e873a2bd6a5b93daaffe3a6e133c
+    github: aikhelis
+    bio: "leads the team of QA and SDETs, trying his hard in managing the testing process and contributing to the test codebases at the same time. Combining incompteible never works; thus he can be often seen recovering his temper by playing the guitar or reading a book."
