@@ -215,7 +215,7 @@ end
 
 ## Comparison to Calabash RPC approach
 
-For comparison, this is how it could be done in the RPC model of Calabash operations.
+To illustraite the difference we added to the way we construct our tests, this is how the same example could be done in the RPC model of existing Calabash operations.
 
 _Extracting sign in form into a Section is omitted for simplicity._
 
