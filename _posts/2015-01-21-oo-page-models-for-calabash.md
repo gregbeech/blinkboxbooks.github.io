@@ -15,8 +15,8 @@ It works with Calabash for both Android and iOS, seamlessly.
 # Pros
 
 - OO model similar to the API of classic open source tools for web such as Selenium, Watir and Capybara
-- This facilitates page objects with API similar to the frameworks, people have been using for web (NB: we quite like siteprism for capybara)
-  - which increases cross-team contribution, as test codebases for our website and mobile apps written in a similar approach
+- This facilitates page objects with API similar to the frameworks, people have been using for web (NB: we quite like Siteprism for Capybara)
+  - which increases cross-team contribution, as test codebases for our website and mobile apps are now written in a similar approach
 - We believe, code becomes more readable this way
 
 # Cons
@@ -39,12 +39,6 @@ foobar = Element.new("foobar") # save foobar selector
 ... # do something on the screen
 foobar.touch() # at this point foobar may not be available in the UI anymore. We will receive same exception as if we called touch("foobar")
 {% endhighlight %}
-
-# Next steps
-
-- Distinguish base class for Sections from Page base class and support section selectors (trait for a section defined within a specific page)
-- Support collection of elements and sections (concept from [Siteprism](https://github.com/natritmeyer/site_prism))
-- This could grow into an abstraction layer on top of any mobile automation driver (e.g. Appium); if we have to switch at some point later, or would like to re-use the same page-models API for a different automation project. We even had an idea to grow it into a driver for capybara, but were not convinced that the game would be worth the candle.
 
 # Code snapshots
 
@@ -215,7 +209,7 @@ end
 
 ## Comparison to Calabash RPC approach
 
-To illustraite the difference we added to the way we construct our tests, this is how the same example could be done in the RPC model of existing Calabash operations.
+To illustrate the difference added to the way we construct our tests, this is how the same example could be done in the RPC model of existing Calabash operations.
 
 _Extracting sign in form into a Section is omitted for simplicity._
 
@@ -269,6 +263,12 @@ Then(/^I should see sign out option in the drawer menu$/) do
   expect(element_exists(user_library_page.signout_button)).to be true
 end
 {% endhighlight %}
+
+# Next steps
+
+- Distinguish base class for Sections from Page base class and support section selectors (trait for a section defined within a specific page)
+- Support collection of elements and sections (concept from [Siteprism](https://github.com/natritmeyer/site_prism))
+- This could grow into an abstraction layer on top of any mobile automation driver (e.g. Appium); if we have to switch at some point later, or would like to re-use the same page-models API for a different automation project. We even had an idea to grow it into a driver for capybara, but were not convinced that the game would be worth the candle.
 
 # Feedback 
 
