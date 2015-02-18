@@ -43,13 +43,32 @@ There's also a Scala version which was intended to work with blinkbox group's si
 
 ## Android App
 
+## Cross Platform Reader
+
+[ ask Vilmos or someone for worked on it ]
 
 
-## Website
+## Web
 
+Two repositories contain the main blinkbox Books website, [Client Web App][cwa] and [Server Web App][swa]. The first is a rather sprawling AngularJS application that served as the whole blinkbox Books website - yes, we only ever had one genuine HTML page on the site. The second is a very simple Node.js proxy for storing OAuth tokens in Redis rather than storing them on the client. It also handled basic error reporting to New Relic and served out configurations to the client. 
 
+Of purely historical interest is the [SEO Server][seo] which was used to present the client side rendered application to search engines, spining up an instance of the PhantomJS headless browser to do so. This never worked particularly well and a full client side render of the page was something the web team had decided was somethig we firmly wanted to move away from for the reason of SEO and performance. For a prototype of the approach we were intending to move to see [Magma][mgm], a new isomorphic pattern for building web applications with time appropriate client and server side rendering. This particular implementation uses Node.js and AngularJS but the approach is intended as a pattern than could be used for any combination of client side JS and a given server side language.
+
+We are also open sourcing [Admin Web App][awa], a customer support application also leveraging the Server Web App for authentication and the very much unfinished [Marvin Frontend][marvin-frontend]. A rough prototype for a new way of browsing books, [B6][b6] (Better Blink box Books Browser) is an interesting project that attempted to rethink the books browsing experience online. A relatively lo-res [video of it in action][b6-video] when integrated into the main blinkbox Books site probably does it more justice than a repository though. Users could browse books by any number of pieces of metadata we held about them: topic, genre, location, feeling, writing style. Users who tested this browsing system seemed to really enjoy it.
+
+# Tests
+
+[ ask someone from test ]
 
 
 [bbb]: https://www.blinkboxbooks.com "blinkbox Books, RIP"
 [bbb-gh]: https://github.com/blinkboxbooks "blinkboxbooks at GitHub"
 [mv-wiki]: https://github.com/blinkboxbooks/Marvin/wiki "Marvin Wiki"
+[cwa]: https://github.com/blinkboxbooks/client-web-app.js "Client Web App"
+[swa]: https://github.com/blinkboxbooks/server-web-app.js "Server Web App"
+[seo]: https://github.com/blinkboxbooks/seo-server.js "SEO Server"
+[mgm]: https://github.com/vilmosioo/magma "Magma"
+[awa]: https://github.com/blinkboxbooks/admin-web-app.js "Admin Web app"
+[marvin-frontend]: https://github.com/blinkboxbooks/marvin-frontend.js "Marvin Front End"
+[b6]: https://github.com/blinkboxbooks/b6.js "B6"
+[b6-video]: https://drive.google.com/file/d/0B0HElogkysuUckdFOVR0QV8zUVE/view?usp=sharing "B6 Video"
